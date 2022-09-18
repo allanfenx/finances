@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { FormControl, Heading, Icon, KeyboardAvoidingView, Pressable, Text, VStack } from "native-base";
+import { Heading, Icon, KeyboardAvoidingView, Pressable, Text, VStack } from "native-base";
 import { ChatTeardropText, Envelope, Key } from "phosphor-react-native";
 import { useContext, useState } from "react";
 import { Alert } from "react-native";

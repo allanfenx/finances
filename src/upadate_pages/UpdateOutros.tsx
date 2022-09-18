@@ -116,6 +116,8 @@ export function UpdateOtherExpenses() {
 
             updateRevenues({ id, category, optional, created_at, values });
 
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
             goBack();
         } catch (error) {
             setIsLoading(false);
@@ -175,7 +177,7 @@ export function UpdateOtherExpenses() {
                     <CustonInput w="full" bg="#202024" borderBottomWidth={1}
                         keyboardType="decimal-pad"
                         value={cash}
-                        onChangeText={setCash}
+                        onChangeText={e => setCash(e.replace("-", ""))}
                         borderBottomColor="#F4F4F5"
                         placeholder="Digite um valor"
                         _focus={{
@@ -187,7 +189,7 @@ export function UpdateOtherExpenses() {
 
             <CustonButton ml="23%" bg="#464647" mt="10" w="64"
                 rounded="3xl" borderWidth="5" alignItems="center"
-                headingFontSize="md" borderColor="white" title="Adicionar"
+                headingFontSize="md" borderColor="white" title="Atualizar"
                 _pressed={{ bg: "gray.900" }} onPress={handleUpdateOtherExpenses}
                 isLoading={isLoading} />
 

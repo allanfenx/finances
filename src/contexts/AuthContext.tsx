@@ -96,7 +96,7 @@ export function AuthProvider({ children }: Chidren) {
     const [select, setSelect] = useState(0);
     const [next, setNext] = useState(0);
     const [day, setDay] = useState(Number(format(new Date(), "dd", { locale: ptBR })));
-    const [week, setWeek] = useState(Number(format(new Date(), "w", { locale: ptBR })) + 1)
+    const [week, setWeek] = useState(Number(format(new Date(), "w", { locale: ptBR })))
     const [mouth, setMouth] = useState(Number(format(new Date(), "MM", { locale: ptBR })))
     const [year, setYear] = useState(Number(format(new Date(), "yyyy", { locale: ptBR })))
 

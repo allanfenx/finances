@@ -113,6 +113,8 @@ export function UpdateEarning() {
 
             updateRevenues({ id, category, optional, created_at, values });
 
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
             goBack();
         } catch (error) {
             setIsLoading(false);
@@ -192,7 +194,7 @@ export function UpdateEarning() {
 
             <CustonButton ml="23%" mt="10" w="64" rounded="3xl" borderWidth="5"
                 onPress={handleUpdateEarning} alignItems="center"
-                headingFontSize="md" borderColor="white" title="Adicionar"
+                headingFontSize="md" borderColor="white" title="Atualizar"
                 isLoading={isLoading} />
 
 

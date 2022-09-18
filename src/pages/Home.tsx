@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Box, FlatList, Heading, HStack, IconButton, ScrollView, Text, VStack } from "native-base";
 import { ChatTeardropText, SignOut, CaretDoubleLeft, CaretDoubleRight, MagnifyingGlass } from "phosphor-react-native";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
-import { format, parseISO, startOfWeek, endOfWeek, parse, endOfDay, startOfMonth, endOfMonth } from "date-fns";
+import { format, parseISO, startOfWeek, endOfWeek, parse, startOfMonth, endOfMonth } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import { FlatButton } from "../components/FlatButon";
@@ -13,6 +13,7 @@ import { authcontext } from "../contexts/AuthContext";
 import { Loading } from "../components/Loading";
 import { Graphic } from "../components/Graphic";
 import { useNavigation } from "@react-navigation/native";
+import { AcessRefreshToken } from "../utils/refreshToken";
 
 
 export function Home() {
@@ -34,7 +35,7 @@ export function Home() {
         setEnviromentSelect(eviroment);
         setSelect(num);
         setNext(0);
-        selectViewDate(Number(todayDate[0]), Number(todayDate[3]) + 1, Number(todayDate[1]), Number(todayDate[2]));
+        selectViewDate(Number(todayDate[0]), Number(todayDate[3]), Number(todayDate[1]), Number(todayDate[2]));
     }
 
     function handleDatePrevius() {
@@ -86,12 +87,22 @@ export function Home() {
 
 
     useEffect(() => {
-        setIsLoading(true)
 
+        AcessRefreshToken();
 
-        listRevenues();
+        async function loading() {
 
-        setIsLoading(false)
+            setIsLoading(true)
+
+            listRevenues();
+
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
+            setIsLoading(false)
+
+        }
+
+        loading();
     }, [select, next]);
 
     return (
@@ -148,7 +159,7 @@ export function Home() {
                     </Box>
 
                 </HStack>
-                <HStack w="full" alignItems="center" justifyContent="space-between" px={70}>
+                <HStack w="full" alignItems="center" justifyContent="space-between" px={10}>
 
                     <IconButton zIndex={5} onPress={handleDatePrevius}
                         icon={<CaretDoubleLeft color="#424FCA" size={25} />} />
@@ -173,7 +184,7 @@ export function Home() {
 
                     <ScrollView mt="5" px="3" pb="10"
                         _contentContainerStyle={{
-                            pb: "32"
+                            pb: "16"
                         }} >
 
                         {revenues.map(revenue => {
@@ -191,7 +202,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy", { locale: ptBR })}
+                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")}
                                     />
                                     break;
 
@@ -206,7 +217,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy", { locale: ptBR })} />
+                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
                                     break;
 
                                 case "Manutenção":
@@ -220,7 +231,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy", { locale: ptBR })} />
+                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
                                     break;
 
                                 case "Outros":
@@ -234,7 +245,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy", { locale: ptBR })} />
+                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
 
                                     break;
                             }
@@ -249,7 +260,6 @@ export function Home() {
 
             </GestureHandlerRootView>
 
-            <IconButton rounded={25} position="absolute" right="5%" bottom="11%" bg="white" icon={<MagnifyingGlass size={25} color="#000" />} />
             <FabButton style={{ bottom: "10%", right: "10%" }} />
 
         </VStack>

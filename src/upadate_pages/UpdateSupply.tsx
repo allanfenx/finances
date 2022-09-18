@@ -111,6 +111,8 @@ export function UpdateSupply() {
 
             updateRevenues({ id, category, optional, created_at, values });
 
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
             goBack();
         } catch (error) {
             setIsLoading(false);
@@ -168,7 +170,7 @@ export function UpdateSupply() {
                     text="Somente numeros e ponto permitido e o valor não pode ser maior 99999999,99"
                     isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
                     <CustonInput w="full" bg="#202024" borderBottomWidth={1}
-                        onChangeText={setCash}
+                        onChangeText={e => setCash(e.replace("-", ""))}
                         value={cash}
                         borderBottomColor="#F4F4F5"
                         keyboardType="decimal-pad"
@@ -182,7 +184,7 @@ export function UpdateSupply() {
 
             <CustonButton ml="23%" bg="#FF7F50" mt="10" w="64" rounded="3xl"
                 borderWidth="5" alignItems="center" headingFontSize="md"
-                borderColor="white" title="Adicionar"
+                borderColor="white" title="Atualizar"
                 isLoading={isLoading} onPress={handleUpdateSupply}
                 _pressed={{
                     bg: "orange.600"

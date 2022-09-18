@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item android:drawable="@color/splashscreen_background"/>
+  <item android:drawable="@drawable/splash" 
+        android:heigth="81dp"
+        android:width="300dp"
+        android:gravity="center" />
 </layer-list>

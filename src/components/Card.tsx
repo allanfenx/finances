@@ -20,8 +20,11 @@ type Props = RectButtonProps & {
 export function Card(data: Props) {
 
 
+
     return (
         <Swipeable
+            overshootRight={false}
+            overshootLeft={false}
             containerStyle={{ marginBottom: 10 }}
             renderRightActions={() => (
                 <Animated.View>
@@ -38,6 +41,7 @@ export function Card(data: Props) {
                     </Pressable>
                 </Animated.View>
             )}
+
         >
             <RectButton>
                 <HStack bg="gray.600" h={60} rounded="sm" overflow="hidden">

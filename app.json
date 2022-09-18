@@ -3,8 +3,12 @@
     "name": "finances",
     "slug": "finances",
     "version": "1.0.0",
+    "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.tecnofenx.driverfinances"
+    }
   }
 }

@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
-import { Box, IBoxProps } from "native-base";
+import { Box, IBoxProps, IconButton } from "native-base";
 import { StyleSheet, TouchableWithoutFeedback, Animated } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome5, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { MagnifyingGlass } from "phosphor-react-native";
 
 
 export function FabButton({ ...rest }: IBoxProps) {
@@ -117,7 +118,23 @@ export function FabButton({ ...rest }: IBoxProps) {
         ]
     }
 
-
+    const search = {
+        transform: [
+            { scale: animatiom },
+            {
+                translateY: animatiom.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, -140]
+                })
+            },
+            {
+                translateX: animatiom.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, -330]
+                })
+            }
+        ]
+    }
 
     const rotation = {
         transform: [{
@@ -131,6 +148,13 @@ export function FabButton({ ...rest }: IBoxProps) {
 
     return (
         <Box alignItems="center" position="absolute" {...rest}>
+
+            <TouchableWithoutFeedback  >
+                <Animated.View style={[styles.button, search, { backgroundColor: "#FFF" }]}>
+                    <MagnifyingGlass size={25} color="#000" />
+                </Animated.View>
+            </TouchableWithoutFeedback>
+
 
             <TouchableWithoutFeedback onPress={handleGanho} >
                 <Animated.View style={[styles.button, earning, { backgroundColor: "#00875F" }]}>

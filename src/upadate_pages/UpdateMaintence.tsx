@@ -134,6 +134,8 @@ export function UpdateMaintence() {
 
             updateRevenues({ id, category, optional, created_at, values });
 
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
             goBack();
         } catch (error) {
             setIsLoading(false);
@@ -195,7 +197,7 @@ export function UpdateMaintence() {
                     <CustonInput w="full" bg="#202024" borderBottomWidth={1}
                         keyboardType="decimal-pad"
                         value={cash}
-                        onChangeText={setCash}
+                        onChangeText={e => setCash(e.replace("-", ""))}
                         borderBottomColor="#F4F4F5"
                         placeholder="Digite um valor"
                         _focus={{
@@ -208,7 +210,7 @@ export function UpdateMaintence() {
             <CustonButton ml="23%" bg="#FF4500" mt="10" w="64"
                 rounded="3xl" borderWidth="5" alignItems="center"
                 headingFontSize="md" borderColor="white"
-                title="Adicionar" _pressed={{ bg: "orange.700" }}
+                title="Atualizar" _pressed={{ bg: "orange.700" }}
                 isLoading={isLoading} onPress={handleSaveMaintence} />
 
 

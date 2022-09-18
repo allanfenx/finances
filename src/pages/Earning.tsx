@@ -92,9 +92,11 @@ export function Earning() {
         try {
 
             setNext(0);
-            selectViewDate(Number(todayDate[0]), Number(todayDate[3]) + 1, Number(todayDate[1]), Number(todayDate[2]));
+            selectViewDate(Number(todayDate[0]), Number(todayDate[3]), Number(todayDate[1]), Number(todayDate[2]));
 
             saveRevenues({ category, optional, created_at, values });
+
+            await new Promise(resolve => setTimeout(resolve, 2500));
 
             goBack();
         } catch (error) {
@@ -117,7 +119,7 @@ export function Earning() {
                 <Heading ml="2" fontSize="sm" color="#D4D4D8" >{format(dateTime, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</Heading>
 
                 <Pressable ml="auto" onPress={handleShowTimePicker}>
-                    {showTimePicker && <DateTimePicker testID="dateTimePicker" value={dateTime} display="default"
+                    {showTimePicker && <DateTimePicker testID="dateTimePicker" value={currentTime} display="default"
                         mode="time" onChange={handleChangeTime} />}
                     <Heading fontSize="sm" color="#D4D4D8">{format(currentTime, "HH:mm", { locale: ptBR })}</Heading>
                 </Pressable>
