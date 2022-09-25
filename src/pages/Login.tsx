@@ -77,8 +77,8 @@ export function Login() {
                 <CustonButton title="Entrar" mt="10" w="full"
                     onPress={handleSingin} isLoading={isLoading} />
 
-                <Pressable onPress={() => navigation.navigate("Register")}>
-                    <Text color="#BEB3B3" mt="56" ml="56" >crie sua conta agora</Text>
+                <Pressable mt="56" ml="56" onPress={() => navigation.navigate("Register")}>
+                    <Text color="#BEB3B3"  >crie sua conta agora</Text>
                 </Pressable>
             </VStack>
         </KeyboardAvoidingView>

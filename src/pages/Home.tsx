@@ -187,9 +187,13 @@ export function Home() {
                             pb: "16"
                         }} >
 
+
                         {revenues.map(revenue => {
 
+                            const getDate = revenue.date.split(" ").map(item => item);
+
                             switch (revenue.category.title) {
+
 
                                 case "Ganhos":
                                     return <Card key={revenue.id}
@@ -202,7 +206,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")}
+                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`}
                                     />
                                     break;
 
@@ -217,7 +221,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
+                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
                                     break;
 
                                 case "Manutenção":
@@ -231,7 +235,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
+                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
                                     break;
 
                                 case "Outros":
@@ -245,7 +249,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={format(parseISO(revenue.created_at), "d/MM/yyyy")} />
+                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
 
                                     break;
                             }

@@ -1,9 +1,15 @@
 {
   "expo": {
-    "name": "finances",
-    "slug": "finances",
-    "version": "1.0.0",
+    "name": "Driver Finances",
+    "slug": "driver-finances",
+    "version": "1.0.1",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#10976F"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],

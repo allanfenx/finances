@@ -23,6 +23,7 @@ type RevenueType = {
     values: number;
     optional: string;
     created_at: string;
+    date: string;
     category: {
         id: number;
         title: string;
@@ -95,10 +96,10 @@ export function AuthProvider({ children }: Chidren) {
     const [enviromentSelect, setEnviromentSelect] = useState("Hoje");
     const [select, setSelect] = useState(0);
     const [next, setNext] = useState(0);
-    const [day, setDay] = useState(Number(format(new Date(), "dd", { locale: ptBR })));
-    const [week, setWeek] = useState(Number(format(new Date(), "w", { locale: ptBR })))
-    const [mouth, setMouth] = useState(Number(format(new Date(), "MM", { locale: ptBR })))
-    const [year, setYear] = useState(Number(format(new Date(), "yyyy", { locale: ptBR })))
+    const [day, setDay] = useState(Number(format(new Date(), "dd")));
+    const [week, setWeek] = useState(Number(format(new Date(), "w")))
+    const [mouth, setMouth] = useState(Number(format(new Date(), "MM")))
+    const [year, setYear] = useState(Number(format(new Date(), "yyyy")))
 
 
 
