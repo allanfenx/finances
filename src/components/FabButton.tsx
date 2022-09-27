@@ -4,6 +4,7 @@ import { StyleSheet, TouchableWithoutFeedback, Animated } from "react-native";
 import { Ionicons, MaterialIcons, FontAwesome5, Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MagnifyingGlass } from "phosphor-react-native";
+import { Dimensions } from "react-native";
 
 
 export function FabButton({ ...rest }: IBoxProps) {
@@ -34,6 +35,8 @@ export function FabButton({ ...rest }: IBoxProps) {
         toggleMenu();
     }
 
+    const { width } = Dimensions.get("window");
+
     function toggleMenu() {
 
         Animated.spring(animatiom, {
@@ -45,6 +48,7 @@ export function FabButton({ ...rest }: IBoxProps) {
         setValue((state) => state ? 0 : 1)
 
     }
+
 
     const earning = {
         transform: [
@@ -58,7 +62,7 @@ export function FabButton({ ...rest }: IBoxProps) {
             {
                 translateX: animatiom.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, -200]
+                    outputRange: [0, -width / 2 + 10]
                 })
             }
         ]
@@ -76,7 +80,7 @@ export function FabButton({ ...rest }: IBoxProps) {
             {
                 translateX: animatiom.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, -160]
+                    outputRange: [0, -width / 2 + 50]
                 })
             }
         ]
@@ -94,7 +98,7 @@ export function FabButton({ ...rest }: IBoxProps) {
             {
                 translateX: animatiom.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, -100]
+                    outputRange: [0, -width / 2 + 110]
                 })
             }
         ]
@@ -112,7 +116,7 @@ export function FabButton({ ...rest }: IBoxProps) {
             {
                 translateX: animatiom.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, -30]
+                    outputRange: [0, -width / 2 + 170]
                 })
             }
         ]
@@ -130,7 +134,7 @@ export function FabButton({ ...rest }: IBoxProps) {
             {
                 translateX: animatiom.interpolate({
                     inputRange: [0, 1],
-                    outputRange: [0, -330]
+                    outputRange: [0, -width / 2 - 100]
                 })
             }
         ]

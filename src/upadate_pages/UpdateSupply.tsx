@@ -1,4 +1,4 @@
-import { Heading, HStack, IconButton, Pressable, Text, VStack } from "native-base";
+import { Heading, HStack, IconButton, Pressable, ScrollView, Text, VStack } from "native-base";
 import { CalendarBlank } from "phosphor-react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { CustonButton } from "../components/CustonButton";
@@ -127,69 +127,72 @@ export function UpdateSupply() {
     return (
         <VStack flex={1} bg="#202024">
 
-            <Header title="Abastecimento" />
-            <HStack w="full" px="3" alignItems="center" >
+            <ScrollView>
 
-                <IconButton onPress={handleShowPicker} icon={<CalendarBlank color="#D4D4D8" size={32} />
-                } />
+                <Header title="Abastecimento" />
+                <HStack w="full" px="3" alignItems="center" >
 
-                {showDateTimePicker &&
-                    <DateTimePicker testID="dateTimePicker" value={dateTime} display="default"
-                        mode="date" onChange={handleChangeDate} />}
+                    <IconButton onPress={handleShowPicker} icon={<CalendarBlank color="#D4D4D8" size={32} />
+                    } />
 
-                <Heading ml="2" fontSize="sm" color="#D4D4D8" >{format(dateTime, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</Heading>
+                    {showDateTimePicker &&
+                        <DateTimePicker testID="dateTimePicker" value={dateTime} display="default"
+                            mode="date" onChange={handleChangeDate} />}
 
-                <Pressable ml="auto" onPress={handleShowTimePicker}>
-                    {showTimePicker && <DateTimePicker testID="dateTimePicker" value={currentTime} display="default"
-                        mode="time" onChange={handleChangeTime} />}
-                    <Heading fontSize="sm" color="#D4D4D8">{format(currentTime, "HH:mm", { locale: ptBR })}</Heading>
-                </Pressable>
-            </HStack>
+                    <Heading ml="2" fontSize="sm" color="#D4D4D8" >{format(dateTime, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</Heading>
+
+                    <Pressable ml="auto" onPress={handleShowTimePicker}>
+                        {showTimePicker && <DateTimePicker testID="dateTimePicker" value={currentTime} display="default"
+                            mode="time" onChange={handleChangeTime} />}
+                        <Heading fontSize="sm" color="#D4D4D8">{format(currentTime, "HH:mm", { locale: ptBR })}</Heading>
+                    </Pressable>
+                </HStack>
 
 
-            <HStack mt="32" ml="7" alignItems="center">
-                <MaterialCommunityIcons name="fuel" color="#52525B" size={36} />
-                <DropDownPicker
-                    open={open}
-                    value={optional}
-                    items={items}
-                    containerStyle={{ width: "85%" }}
-                    setOpen={setOpen}
-                    setValue={setOptional}
-                    setItems={setItems}
-                    labelStyle={{ color: "#F4F4F5" }}
-                    listItemLabelStyle={{ color: "#F4F4F5" }}
-                    dropDownContainerStyle={{ borderWidth: 0, backgroundColor: "#52525B" }}
-                    style={{ borderWidth: 0, backgroundColor: "#52525B" }}
-                />
-            </HStack>
+                <HStack mt="32" ml="7" alignItems="center">
+                    <MaterialCommunityIcons name="fuel" color="#52525B" size={36} />
+                    <DropDownPicker
+                        open={open}
+                        value={optional}
+                        items={items}
+                        containerStyle={{ width: "85%" }}
+                        setOpen={setOpen}
+                        setValue={setOptional}
+                        setItems={setItems}
+                        labelStyle={{ color: "#F4F4F5" }}
+                        listItemLabelStyle={{ color: "#F4F4F5" }}
+                        dropDownContainerStyle={{ borderWidth: 0, backgroundColor: "#52525B", height: "300%" }}
+                        style={{ borderWidth: 0, backgroundColor: "#52525B" }}
+                    />
+                </HStack>
 
-            <HStack px={10} mt="12" alignItems="center">
-                <Text fontSize="xl" mt="1" color="#FF7F50" >R$</Text>
-                <ValidForm field={!!cash}
-                    text="Somente numeros e ponto permitido e o valor não pode ser maior 99999999,99"
-                    isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
-                    <CustonInput w="full" bg="#202024" borderBottomWidth={1}
-                        onChangeText={e => setCash(e.replace("-", ""))}
-                        value={cash}
-                        borderBottomColor="#F4F4F5"
-                        keyboardType="decimal-pad"
-                        placeholder="Digite um valor"
-                        _focus={{
-                            bg: "#202024",
-                            borderBottomColor: "#FF7F50"
-                        }} />
-                </ValidForm>
-            </HStack>
+                <HStack px={10} mt="12" alignItems="center">
+                    <Text fontSize="xl" mt="1" color="#FF7F50" >R$</Text>
+                    <ValidForm field={!!cash}
+                        text="Somente numeros e ponto permitido e o valor não pode ser maior 99999999,99"
+                        isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
+                        <CustonInput w="full" bg="#202024" borderBottomWidth={1}
+                            onChangeText={e => setCash(e.replace("-", ""))}
+                            value={cash}
+                            borderBottomColor="#F4F4F5"
+                            keyboardType="decimal-pad"
+                            placeholder="Digite um valor"
+                            _focus={{
+                                bg: "#202024",
+                                borderBottomColor: "#FF7F50"
+                            }} />
+                    </ValidForm>
+                </HStack>
 
-            <CustonButton ml="23%" bg="#FF7F50" mt="10" w="64" rounded="3xl"
-                borderWidth="5" alignItems="center" headingFontSize="md"
-                borderColor="white" title="Atualizar"
-                isLoading={isLoading} onPress={handleUpdateSupply}
-                _pressed={{
-                    bg: "orange.600"
-                }} />
+                <CustonButton ml="23%" bg="#FF7F50" mt="10" w="64" rounded="3xl"
+                    borderWidth="5" alignItems="center" headingFontSize="md"
+                    borderColor="white" title="Atualizar"
+                    isLoading={isLoading} onPress={handleUpdateSupply}
+                    _pressed={{
+                        bg: "orange.600"
+                    }} />
 
+            </ScrollView>
 
         </VStack>
     )

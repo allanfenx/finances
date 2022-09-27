@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Heading, Icon, KeyboardAvoidingView, Pressable, Text, VStack } from "native-base";
+import { Heading, Icon, KeyboardAvoidingView, Pressable, ScrollView, Text, VStack } from "native-base";
 import { ChatTeardropText, Envelope, Key, User } from "phosphor-react-native";
 import { useState } from "react";
 import { Alert } from "react-native";
@@ -13,6 +13,7 @@ export function Register() {
 
     const navigation = useNavigation();
 
+    const [showPressable, setShowPresseble] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -59,45 +60,52 @@ export function Register() {
 
     return (
 
-        <KeyboardAvoidingView flex={1} behavior="padding" bg="#202024">
 
-            <VStack flex={1} px="4" alignItems="center" bg="#202024">
+        <VStack flex={1} px="4" alignItems="center" bg="#202024">
+
+            <ScrollView w="full" h="full" contentContainerStyle={{ justifyContent: "center", alignItems: "center" }}>
 
                 <ChatTeardropText style={{ marginTop: 81 }} color="#00875F" size={80} />
                 <Heading mt="2" color="#00875F" fontSize="2xl" >Driver Finances</Heading>
 
-                <Heading color="#E1E1E6" mt="4" fontSize="2xl" >Acesse sua conta</Heading>
+                <Heading color="#E1E1E6" mt="4" fontSize="2xl" >Crie sua conta</Heading>
 
                 <CustonInput mt="5"
                     InputLeftElement={<Icon as={<User color="#7C7C8A" />} ml="2" size="lg" />}
-                    placeholder="Nome" onChangeText={setName} />
+                    placeholder="Nome" onChangeText={setName} onFocus={() => setShowPresseble(false)}
+                    onBlur={() => setShowPresseble(true)} />
 
                 <ValidForm isInvalid={!email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)}
                     text="Digite um email valido" field={!!email}>
                     <CustonInput mt="2" keyboardType="email-address"
                         InputLeftElement={<Icon as={<Envelope color="#7C7C8A" />} ml="2" size="lg" />}
-                        placeholder="E-mail" onChangeText={setEmail} />
+                        placeholder="E-mail" onChangeText={setEmail} onFocus={() => setShowPresseble(false)}
+                        onBlur={() => setShowPresseble(true)} />
                 </ValidForm>
 
                 <ValidForm isInvalid={!password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)}
                     text="Senha deve conter 8 caracteres com pelo menos uma letra e um numero" field={!!password}>
                     <CustonInput mt="2" secureTextEntry
                         InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
-                        placeholder="Senha" onChangeText={setPassword} />
+                        placeholder="Senha" onChangeText={setPassword} onFocus={() => setShowPresseble(false)}
+                        onBlur={() => setShowPresseble(true)} />
                 </ValidForm>
 
                 <CustonInput mt="2" secureTextEntry
                     InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
-                    placeholder="Confirme sua senha" onChangeText={setRepeatPassword} />
+                    placeholder="Confirme sua senha" onChangeText={setRepeatPassword}
+                    onFocus={() => setShowPresseble(false)} onBlur={() => setShowPresseble(true)} />
 
                 <CustonButton title="Registrar" onPress={handleRegisterUser}
                     headingFontSize="xl" mt="10" w="full" isLoading={isLoading} />
 
-                <Pressable ml="auto" onPress={() => navigation.navigate("Login")}>
-                    <Text color="#BEB3B3" mt="9"  >Voltar para login</Text>
-                </Pressable>
+            </ScrollView>
 
-            </VStack>
-        </KeyboardAvoidingView>
+            {showPressable && <Pressable ml="auto" mb="4" onPress={() => navigation.navigate("Login")}>
+                <Text color="#BEB3B3" >Voltar para login</Text>
+            </Pressable>}
+
+
+        </VStack>
     )
 }
