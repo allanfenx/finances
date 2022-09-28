@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Heading, Icon, Pressable, Text, VStack, KeyboardAvoidingView, ScrollView } from "native-base";
 import { ChatTeardropText, Envelope, Key } from "phosphor-react-native";
 import { useContext, useState } from "react";
-import { Alert, StyleSheet } from "react-native";
+import { Alert, Dimensions, StyleSheet } from "react-native";
 import { CustonButton } from "../components/CustonButton";
 import { CustonInput } from "../components/CustonInput";
 import { ValidForm } from "../components/ValidForm";
@@ -14,6 +14,8 @@ import { authApi } from "../services/authApi";
 export function Login() {
 
     const { alredUserExist } = useContext(authcontext);
+
+    const { height } = Dimensions.get("window");
 
     const navigation = useNavigation();
 
@@ -58,7 +60,8 @@ export function Login() {
 
         <VStack flex={1} px="4" alignItems="center" bg="#202024">
             <ScrollView w="full" h="full"
-                contentContainerStyle={{ justifyContent: "center", alignItems: "center", paddingBottom: 10 }} >
+                contentContainerStyle={{ justifyContent: "center", alignItems: "center", paddingBottom: 10 }}
+                showsVerticalScrollIndicator={false} >
 
                 <ChatTeardropText style={{ marginTop: 81 }} color="#00875F" size={80} />
                 <Heading mt="2" color="#00875F" fontSize="2xl" >Driver Finances</Heading>
@@ -69,23 +72,22 @@ export function Login() {
                     text="Digite um email valido" field={!!email} >
                     <CustonInput mt="5" keyboardType="email-address" onChangeText={setEmail}
                         InputLeftElement={<Icon as={<Envelope color="#7C7C8A" />} ml="2" size="lg" />}
-                        placeholder="E-mail" onFocus={() => setShowPresseble(false)}
-                        onBlur={() => setShowPresseble(true)} />
+                        placeholder="E-mail" />
                 </ValidForm>
 
                 <CustonInput mt="5" secureTextEntry onChangeText={setPassword}
                     InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
-                    placeholder="Senha" onFocus={() => setShowPresseble(false)}
-                    onBlur={() => setShowPresseble(true)} />
+                    placeholder="Senha" />
 
                 <CustonButton title="Entrar" mt="10" w="full"
                     onPress={handleSingin} isLoading={isLoading} />
 
+                <Pressable ml="auto" mb="6" mt={height / 7} onPress={() => navigation.navigate("Register")}>
+                    <Text color="#BEB3B3"  >crie sua conta agora</Text>
+                </Pressable>
+
             </ScrollView>
 
-            {showPressable && <Pressable ml="auto" mb="6" onPress={() => navigation.navigate("Register")}>
-                <Text color="#BEB3B3"  >crie sua conta agora</Text>
-            </Pressable>}
 
         </VStack>
     )
