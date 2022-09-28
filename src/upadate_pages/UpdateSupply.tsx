@@ -172,8 +172,8 @@ export function UpdateSupply() {
                         text="Somente numeros e ponto permitido e o valor não pode ser maior 99999999,99"
                         isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
                         <CustonInput w="full" bg="#202024" borderBottomWidth={1}
-                            onChangeText={e => setCash(e.replace("-", ""))}
-                            value={cash}
+                            onChangeText={e => setCash(e.replace(/([0-9]{9}).([0-9]{2}$)/g, ""))}
+                            value={cash.replace("-", "")}
                             borderBottomColor="#F4F4F5"
                             keyboardType="decimal-pad"
                             placeholder="Digite um valor"

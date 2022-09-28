@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Box, FlatList, Heading, HStack, IconButton, ScrollView, Text, VStack } from "native-base";
-import { ChatTeardropText, SignOut, CaretDoubleLeft, CaretDoubleRight, MagnifyingGlass } from "phosphor-react-native";
+import { ChatTeardropText, SignOut, CaretDoubleLeft, CaretDoubleRight } from "phosphor-react-native";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
-import { format, parseISO, startOfWeek, endOfWeek, parse, startOfMonth, endOfMonth } from "date-fns";
+import { format, startOfWeek, endOfWeek, parse, startOfMonth, endOfMonth } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 import { FlatButton } from "../components/FlatButon";
@@ -14,6 +14,7 @@ import { Loading } from "../components/Loading";
 import { Graphic } from "../components/Graphic";
 import { useNavigation } from "@react-navigation/native";
 import { AcessRefreshToken } from "../utils/refreshToken";
+import { FormatDate } from "../utils/FormatDate";
 
 
 export function Home() {
@@ -94,9 +95,7 @@ export function Home() {
 
             setIsLoading(true)
 
-            listRevenues();
-
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            await listRevenues();
 
             setIsLoading(false)
 
@@ -190,7 +189,6 @@ export function Home() {
 
                         {revenues.map(revenue => {
 
-                            const getDate = revenue.date.split(" ").map(item => item);
 
                             switch (revenue.category.title) {
 
@@ -206,7 +204,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`}
+                                        date={FormatDate(revenue.created_at)}
                                     />
                                     break;
 
@@ -221,7 +219,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
+                                        date={FormatDate(revenue.created_at)} />
                                     break;
 
                                 case "Manutenção":
@@ -235,7 +233,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
+                                        date={FormatDate(revenue.created_at)} />
                                     break;
 
                                 case "Outros":
@@ -249,7 +247,7 @@ export function Home() {
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
                                         textValue={revenue.values}
-                                        date={`${getDate[0]}/${getDate[1]}/${getDate[2]}`} />
+                                        date={FormatDate(revenue.created_at)} />
 
                                     break;
                             }

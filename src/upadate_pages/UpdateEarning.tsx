@@ -186,7 +186,8 @@ export function UpdateEarning() {
                         <CustonInput w="full" bg="#202024" borderBottomWidth={1}
                             keyboardType="decimal-pad"
                             value={cash}
-                            borderBottomColor="#F4F4F5" onChangeText={setCash}
+                            borderBottomColor="#F4F4F5"
+                            onChangeText={e => setCash(e.replace(/([0-9]{9}).([0-9]{2}$)/g, ""))}
                             placeholder="Digite um valor"
                             _focus={{
                                 bg: "#202024",

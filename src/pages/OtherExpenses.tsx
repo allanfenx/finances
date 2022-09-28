@@ -160,7 +160,7 @@ export function OtherExpenses() {
                         isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
                         <CustonInput w="full" bg="#202024" borderBottomWidth={1}
                             keyboardType="decimal-pad"
-                            onChangeText={setCash}
+                            onChangeText={e => setCash(e.replace(/([0-9]{9}).([0-9]{2}$)/g, ""))}
                             borderBottomColor="#F4F4F5"
                             placeholder="Digite um valor"
                             _focus={{
