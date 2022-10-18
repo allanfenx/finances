@@ -13,8 +13,8 @@ export function Register() {
 
     const navigation = useNavigation();
 
-    const { height } = Dimensions.get("window");
 
+    const [showPressable, setShowPresseble] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -73,11 +73,15 @@ export function Register() {
 
                 <CustonInput mt="5"
                     InputLeftElement={<Icon as={<User color="#7C7C8A" />} ml="2" size="lg" />}
+                    onFocus={() => setShowPresseble(false)}
+                    onBlur={() => setShowPresseble(true)}
                     placeholder="Nome" onChangeText={setName} />
 
                 <ValidForm isInvalid={!email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)}
                     text="Digite um email valido" field={!!email}>
                     <CustonInput mt="2" keyboardType="email-address"
+                        onFocus={() => setShowPresseble(false)}
+                        onBlur={() => setShowPresseble(true)}
                         InputLeftElement={<Icon as={<Envelope color="#7C7C8A" />} ml="2" size="lg" />}
                         placeholder="E-mail" onChangeText={setEmail} />
                 </ValidForm>
@@ -85,23 +89,27 @@ export function Register() {
                 <ValidForm isInvalid={!password.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)}
                     text="Senha deve conter 8 caracteres com pelo menos uma letra e um numero" field={!!password}>
                     <CustonInput mt="2" secureTextEntry
+                        onFocus={() => setShowPresseble(false)}
+                        onBlur={() => setShowPresseble(true)}
                         InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
                         placeholder="Senha" onChangeText={setPassword} />
                 </ValidForm>
 
                 <CustonInput mt="2" secureTextEntry
+                    onFocus={() => setShowPresseble(false)}
+                    onBlur={() => setShowPresseble(true)}
                     InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
                     placeholder="Confirme sua senha" onChangeText={setRepeatPassword} />
 
                 <CustonButton title="Registrar" onPress={handleRegisterUser}
                     headingFontSize="xl" mt="10" w="full" isLoading={isLoading} />
 
-                <Pressable ml="auto" mb="4" mt={height / 10} onPress={() => navigation.navigate("Login")}>
-                    <Text color="#BEB3B3" >Voltar para login</Text>
-                </Pressable>
 
             </ScrollView>
 
+            {showPressable && <Pressable ml="auto" mb="4" onPress={() => navigation.navigate("Login")}>
+                <Text color="#BEB3B3" >Voltar para login</Text>
+            </Pressable>}
 
 
         </VStack>

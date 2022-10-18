@@ -111,9 +111,9 @@ export function UpdateEarning() {
             setNext(0);
             selectViewDate(Number(todayDate[0]), Number(todayDate[3]) + 1, Number(todayDate[1]), Number(todayDate[2]));
 
-            updateRevenues({ id, category, optional, created_at, values });
+            await updateRevenues({ id, category, optional, created_at, values });
 
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
             goBack();
         } catch (error) {

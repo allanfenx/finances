@@ -15,6 +15,7 @@ import { Graphic } from "../components/Graphic";
 import { useNavigation } from "@react-navigation/native";
 import { AcessRefreshToken } from "../utils/refreshToken";
 import { FormatDate } from "../utils/FormatDate";
+import { Alert } from "react-native";
 
 
 export function Home() {
@@ -75,7 +76,25 @@ export function Home() {
         selectViewDate(day + 1, week + 1, mouth + 1, year + 1);
     }
 
-    const currentWeek = parse(String(week), "w", new Date());
+    async function handleDeleteRevenue(id: number) {
+
+        setIsLoading(true);
+
+        try {
+
+            await deleteRevenues(id);
+
+            await listRevenues();
+
+            setIsLoading(false);
+
+        } catch (error) {
+            Alert.alert(error.resposnse.data)
+            setIsLoading(false)
+        }
+    }
+
+    const currentWeek = parse(String(week + 1), "w", new Date());
     const currentMouth = parse(String(mouth), "MM", new Date());
 
     const mouthFormatDay = format(new Date(), " 'de' MMMM yyyy", { locale: ptBR })
@@ -198,7 +217,7 @@ export function Home() {
                                         selectRevenue={() => navigate("UpdateGanho", { id: revenue.id })}
                                         textColorValue="#2BC094"
                                         bg="#00875F"
-                                        delete={() => deleteRevenues(revenue.id)}
+                                        delete={() => handleDeleteRevenue(revenue.id)}
                                         textColor="#2BC094"
                                         icon={<Ionicons name="cash-outline" size={50} color="white" />}
                                         textCategory={revenue.category.title}
@@ -214,7 +233,7 @@ export function Home() {
                                         textColorValue="#E06262"
                                         bg="#FF7F50"
                                         textColor="#FF7F50"
-                                        delete={() => deleteRevenues(revenue.id)}
+                                        delete={() => handleDeleteRevenue(revenue.id)}
                                         icon={<MaterialIcons name="local-gas-station" size={50} color="white" />}
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
@@ -228,7 +247,7 @@ export function Home() {
                                         textColorValue="#E06262"
                                         bg="#FF4500"
                                         textColor="#FF4500"
-                                        delete={() => deleteRevenues(revenue.id)}
+                                        delete={() => handleDeleteRevenue(revenue.id)}
                                         icon={<FontAwesome5 name="oil-can" size={40} color="white" />}
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}
@@ -242,7 +261,7 @@ export function Home() {
                                         textColorValue="#E06262"
                                         bg="#696969"
                                         textColor="gray.400"
-                                        delete={() => deleteRevenues(revenue.id)}
+                                        delete={() => handleDeleteRevenue(revenue.id)}
                                         icon={<Ionicons name="card-outline" size={50} color="white" />}
                                         textCategory={revenue.category.title}
                                         textOptional={revenue.optional}

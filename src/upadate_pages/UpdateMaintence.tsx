@@ -132,9 +132,9 @@ export function UpdateMaintence() {
             setNext(0);
             selectViewDate(Number(todayDate[0]), Number(todayDate[3]) + 1, Number(todayDate[1]), Number(todayDate[2]));
 
-            updateRevenues({ id, category, optional, created_at, values });
+            await updateRevenues({ id, category, optional, created_at, values });
 
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            await new Promise(resolve => setTimeout(resolve, 2000));
 
             goBack();
         } catch (error) {
@@ -199,7 +199,7 @@ export function UpdateMaintence() {
                         isInvalid={Number(cash) > 9999999.99 || !Number(cash)}>
                         <CustonInput w="full" bg="#202024" borderBottomWidth={1}
                             keyboardType="decimal-pad"
-                            value={cash.replace("-", "")}
+                            value={cash}
                             onChangeText={e => setCash(e.replace(/([0-9]{9}).([0-9]{2}$)/g, ""))}
                             borderBottomColor="#F4F4F5"
                             placeholder="Digite um valor"

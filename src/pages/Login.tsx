@@ -15,8 +15,6 @@ export function Login() {
 
     const { alredUserExist } = useContext(authcontext);
 
-    const { height } = Dimensions.get("window");
-
     const navigation = useNavigation();
 
     const [showPressable, setShowPresseble] = useState(true);
@@ -71,22 +69,26 @@ export function Login() {
                 <ValidForm isInvalid={!email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)}
                     text="Digite um email valido" field={!!email} >
                     <CustonInput mt="5" keyboardType="email-address" onChangeText={setEmail}
+                        onFocus={() => setShowPresseble(false)}
+                        onBlur={() => setShowPresseble(true)}
                         InputLeftElement={<Icon as={<Envelope color="#7C7C8A" />} ml="2" size="lg" />}
                         placeholder="E-mail" />
                 </ValidForm>
 
                 <CustonInput mt="5" secureTextEntry onChangeText={setPassword}
+                    onFocus={() => setShowPresseble(false)}
+                    onBlur={() => setShowPresseble(true)}
                     InputLeftElement={<Icon as={<Key color="#7C7C8A" />} ml="2" size="lg" />}
                     placeholder="Senha" />
 
+
                 <CustonButton title="Entrar" mt="10" w="full"
                     onPress={handleSingin} isLoading={isLoading} />
-
-                <Pressable ml="auto" mb="6" mt={height / 7} onPress={() => navigation.navigate("Register")}>
-                    <Text color="#BEB3B3"  >crie sua conta agora</Text>
-                </Pressable>
-
             </ScrollView>
+
+            {showPressable && <Pressable ml="auto" mb="6" onPress={() => navigation.navigate("Register")}>
+                <Text color="#BEB3B3"  >crie sua conta agora</Text>
+            </Pressable>}
 
 
         </VStack>

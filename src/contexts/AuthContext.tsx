@@ -176,7 +176,6 @@ export function AuthProvider({ children }: Chidren) {
         try {
             await financeApi.delete(`revenues/${id}`);
 
-            listRevenues();
         } catch (error) {
             console.log(error.response.data);
         }

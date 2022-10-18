@@ -35,6 +35,12 @@ export function FabButton({ ...rest }: IBoxProps) {
         toggleMenu();
     }
 
+
+    function handleSearch() {
+        navigate("Search");
+        toggleMenu();
+    }
+
     const { width } = Dimensions.get("window");
 
     function toggleMenu() {
@@ -153,11 +159,11 @@ export function FabButton({ ...rest }: IBoxProps) {
     return (
         <Box alignItems="center" position="absolute" {...rest}>
 
-            <TouchableWithoutFeedback  >
+            {/* <TouchableWithoutFeedback onPress={handleSearch} >
                 <Animated.View style={[styles.button, search, { backgroundColor: "#FFF" }]}>
                     <MagnifyingGlass size={25} color="#000" />
                 </Animated.View>
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> */}
 
 
             <TouchableWithoutFeedback onPress={handleGanho} >

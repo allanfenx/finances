@@ -3,6 +3,7 @@ import { Earning } from "../pages/Earning";
 import { Home } from "../pages/Home";
 import { Maintence } from "../pages/Maintence";
 import { OtherExpenses } from "../pages/OtherExpenses";
+import { Search } from "../pages/Search";
 import { Supply } from "../pages/Supply";
 import { UpdateEarning } from "../upadate_pages/UpdateEarning";
 import { UpdateMaintence } from "../upadate_pages/UpdateMaintence";
@@ -20,6 +21,7 @@ export function AppRoutes() {
             <Screen name="Ganho" component={Earning} />
             <Screen name="Abastecimento" component={Supply} />
             <Screen name="Manutenção" component={Maintence} />
+            <Screen name="Search" component={Search} />
             <Screen name="Outras" component={OtherExpenses} />
             <Screen name="UpdateGanho" component={UpdateEarning} />
             <Screen name="UpdateAbastecimento" component={UpdateSupply} />
